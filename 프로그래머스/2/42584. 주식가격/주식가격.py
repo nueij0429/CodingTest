@@ -1,12 +1,15 @@
 def solution(prices):
-    answer=[]
-    for i in range(len(prices)): # 0-4
-        current_price = prices[i]
-        count = 0
-        for j in range(i+1,len(prices)): # 1-4 , 2-4 , 3-4 ,4-4
-            count += 1
-            if prices[j] < current_price:
-                break
-        answer.append(count)
-    answer[-1]=0
+    answer = [0] * len(prices)
+    stack = []
+    
+    for i in range(len(prices)):
+        while stack and prices[i] < prices[stack[-1]]:
+            j = stack.pop()
+            answer[j] = i - j #유지된 시간 = 현재 시점-그 시점
+        stack.append(i)
+
+    while stack:
+        j = stack.pop()
+        answer[j] = len(prices) - 1 - j
+        
     return answer
