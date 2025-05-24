@@ -10,5 +10,7 @@ for test_case in range(1, T + 1):
     else:
         for i in range(m1, m2):
             change += month[i]
+        
         change += d2 - d1
+        
     print(f'#{test_case} {change}')
